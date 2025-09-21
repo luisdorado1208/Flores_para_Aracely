@@ -3,8 +3,6 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="style_mobile.css">
 <title>Tarjeta para Aracely 🌼</title>
 <style>
 :root{
@@ -30,7 +28,7 @@ body{
 .wrap{
   width: min(95%, 760px);
   height: auto;
-  aspect-ratio: 3/2; /* mantiene proporción en móviles */
+  aspect-ratio: 3/2; /* mantiene proporción en escritorio */
   display:flex;
   align-items:center;
   justify-content:center;
@@ -159,11 +157,40 @@ body{
 .falling .petal.left{ left: -10px; transform: rotate(-15deg); }
 .falling .petal.right{ right: -10px; transform: rotate(15deg); }
 
-/* --- Ajustes para pantallas pequeñas --- */
-@media (max-width:600px){
-  body{ padding:1rem; }
-  .wrap{ aspect-ratio: auto; height:auto; }
-  .card-front, .card-inside{ padding:1rem; }
+/* --- Ajustes responsivos --- */
+
+/* Para pantallas hasta 425px */
+@media (max-width: 425px) {
+  body{ padding:0.5rem; }
+  .wrap{ width:100%; aspect-ratio:auto; height:auto; }
+  .card-front, .card-inside{ padding:0.8rem; }
+  .cover-title{ font-size:1.2rem; }
+  .cover-sub{ font-size:0.85rem; }
+  .message{ font-size:1rem; }
+  .text{ font-size:0.85rem; }
+  .spongebob-img{ width:90px; }
+  .open-btn, .btn-secret, .btn-music, .close-btn{ font-size:0.8rem; padding:0.6rem 1rem; }
+}
+
+/* Para pantallas hasta 375px */
+@media (max-width: 375px) {
+  .cover-title{ font-size:1.1rem; }
+  .cover-sub{ font-size:0.8rem; }
+  .message{ font-size:0.95rem; }
+  .text{ font-size:0.8rem; }
+  .spongebob-img{ width:80px; }
+  .open-btn, .btn-secret, .btn-music, .close-btn{ font-size:0.75rem; padding:0.5rem 0.9rem; }
+}
+
+/* Para pantallas hasta 320px */
+@media (max-width: 320px) {
+  .wrap{ width:100%; }
+  .cover-title{ font-size:1rem; }
+  .cover-sub{ font-size:0.75rem; }
+  .message{ font-size:0.9rem; }
+  .text{ font-size:0.75rem; }
+  .spongebob-img{ width:70px; }
+  .open-btn, .btn-secret, .btn-music, .close-btn{ font-size:0.7rem; padding:0.5rem 0.8rem; }
 }
 </style>
 </head>
@@ -197,6 +224,7 @@ body{
   </div>
 </div>
 
+<!-- Usa un mp3 que esté en tu repo o un link directo -->
 <audio id="song" src="02 Hans Zimmer - Spirit： Stallion of the Cimarron - Swimming.mp3" autoplay loop></audio>
 
 <script>

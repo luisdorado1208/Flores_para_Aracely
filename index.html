@@ -21,12 +21,14 @@ body{
   font-family: "Segoe UI", Arial, sans-serif;
   perspective:1400px;
   padding:2rem;
-  overflow:hidden;
+  overflow-x:hidden;
 }
 
+/* --- Contenedor principal --- */
 .wrap{
-  width: min(760px, 95%);
-  height: 500px;
+  width: min(95%, 760px);
+  height: auto;
+  aspect-ratio: 3/2; /* mantiene proporción en móviles */
   display:flex;
   align-items:center;
   justify-content:center;
@@ -35,6 +37,7 @@ body{
   z-index: 10;
 }
 
+/* --- Tarjeta --- */
 .card {
   width:100%;
   height:100%;
@@ -49,13 +52,13 @@ body{
   position:absolute;
   inset:0;
   border-radius:14px;
-  border:6px solid var(--gold);
+  border:0.4em solid var(--gold);
   background: var(--paper);
   box-shadow: 0 18px 40px rgba(0,0,0,0.18), inset 0 0 18px rgba(255,200,0,0.08);
   backface-visibility:hidden;
   display:flex;
   flex-direction:column;
-  padding:22px;
+  padding:1.2em;
   overflow:hidden;
 }
 
@@ -63,10 +66,10 @@ body{
   z-index:2;
   align-items:center;
   justify-content:center;
-  gap:8px;
+  gap:0.5em;
 }
-.cover-title{ font-size:1.9rem; color:#5a3700; text-align:center; }
-.cover-sub{ color:#7a4c00; margin-bottom:6px; text-align:center }
+.cover-title{ font-size:clamp(1.4rem, 2.5vw, 2rem); color:#5a3700; text-align:center; }
+.cover-sub{ color:#7a4c00; margin-bottom:6px; text-align:center; font-size:clamp(0.9rem, 2vw, 1.1rem); }
 
 .open-btn, .btn-secret, .btn-music{
   padding:.8rem 1.4rem;
@@ -75,6 +78,7 @@ body{
   cursor:pointer;
   background:linear-gradient(90deg,#ffd54a,#ffb300);
   font-weight:700;
+  font-size:clamp(0.9rem, 2vw, 1rem);
   color:#3a2a05;
   box-shadow:0 8px 18px rgba(255,170,0,0.18);
 }
@@ -98,37 +102,40 @@ body{
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  gap:14px;
+  gap:0.8em;
 }
 
-.message{ font-size:1.35rem; color:#a06100; text-align:center }
-.text{ color:var(--text); font-size:1rem; line-height:1.45; text-align:center }
+.message{ font-size:clamp(1.1rem, 2.5vw, 1.5rem); color:#a06100; text-align:center }
+.text{ color:var(--text); font-size:clamp(0.9rem, 2vw, 1rem); line-height:1.5; text-align:center }
 
-.footer-emo{ margin-top:12px; font-size:20px; color:var(--accent) }
+.footer-emo{ margin-top:12px; font-size:clamp(1rem, 2vw, 1.3rem); color:var(--accent) }
 
 .spongebob-img {
-  width: 120px;
+  width: clamp(90px, 25vw, 140px);
   height: auto;
   margin-top: 12px;
   border-radius:12px;
   box-shadow: 0 6px 16px rgba(0,0,0,0.2);
 }
 
+/* --- Popup --- */
 .popup{
   position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
   background:rgba(0,0,0,0.6); visibility:hidden; opacity:0; transition:.25s; z-index:999;
 }
 .popup.show{ visibility:visible; opacity:1 }
 .popup-content{
-  background:#fff8dc; padding:20px; border-radius:12px; max-width:420px; text-align:center;
+  background:#fff8dc; padding:1.2em; border-radius:12px; max-width:90%; text-align:center;
   box-shadow:0 14px 36px rgba(0,0,0,0.28);
   transform:translateY(8px); animation:pop .35s ease;
+  font-size:clamp(0.9rem, 2vw, 1rem);
 }
 @keyframes pop{ from{transform:translateY(20px) scale(.96)} to{transform:translateY(0) scale(1)} }
-.close-btn{ margin-top:12px; padding:.6rem 1rem; border-radius:10px; border:none; cursor:pointer; background:#f9a825; color:white; font-weight:700 }
+.close-btn{ margin-top:12px; padding:.6rem 1rem; border-radius:10px; border:none; cursor:pointer; background:#f9a825; color:white; font-weight:700; font-size:clamp(0.8rem, 2vw, 1rem); }
 
 .card.open{ transform: rotateY(-180deg) scale(1.01); }
 
+/* --- Animación flores cayendo --- */
 .falling{
   position: absolute;
   top: -100px;
@@ -145,13 +152,16 @@ body{
 .falling .leaf{ position: absolute; bottom: 20px; width: 20px; height: 40px; background: green; border-radius: 50%; }
 .falling .leaf.left{ left: -15px; transform: rotate(-30deg); }
 .falling .leaf.right{ right: -15px; transform: rotate(30deg); }
-.falling .flower{ position: absolute; bottom: 70px; left: 50%; transform: translateX(-50%); width: 50px; height: 50px; background: #ffd93d; border-radius: 50% 50% 0 0; overflow: hidden; box-shadow: inset -3px -3px 10px rgba(0,0,0,0.1); }
-.falling .petal{ position: absolute; width: 25px; height: 50px; background: #f5b700; border-radius: 50%; top: 0; }
+.falling .flower{ position: absolute; bottom: 70px; left: 50%; transform: translateX(-50%); width: 40px; height: 40px; background: #ffd93d; border-radius: 50% 50% 0 0; overflow: hidden; box-shadow: inset -3px -3px 10px rgba(0,0,0,0.1); }
+.falling .petal{ position: absolute; width: 20px; height: 40px; background: #f5b700; border-radius: 50%; top: 0; }
 .falling .petal.left{ left: -10px; transform: rotate(-15deg); }
 .falling .petal.right{ right: -10px; transform: rotate(15deg); }
 
-@media (max-width:720px){
-  .wrap{ height:auto; padding:12px 0; }
+/* --- Ajustes para pantallas pequeñas --- */
+@media (max-width:600px){
+  body{ padding:1rem; }
+  .wrap{ aspect-ratio: auto; height:auto; }
+  .card-front, .card-inside{ padding:1rem; }
 }
 </style>
 </head>
@@ -180,7 +190,7 @@ body{
 <div id="popup" class="popup">
   <div class="popup-content">
     <h2>🌼 Eres única 🌼</h2>
-    <p>Gracias por iluminar esta vida,sabes que te aprecio mucho.¡Sigue sonriendo siempre!" 💛</p>
+    <p>Gracias por iluminar esta vida, sabes que te aprecio mucho. ¡Sigue sonriendo siempre! 💛</p>
     <button id="closePopup" class="close-btn">Cerrar</button>
   </div>
 </div>

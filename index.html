@@ -24,6 +24,7 @@ body{
   overflow-x:hidden;
 }
 
+
 /* --- Contenedor principal --- */
 .wrap{
   width: min(95%, 760px);
@@ -37,6 +38,7 @@ body{
   z-index: 10;
 }
 
+
 /* --- Tarjeta --- */
 .card {
   width:100%;
@@ -47,6 +49,7 @@ body{
   transform-origin: center;
   border-radius:16px;
 }
+
 
 .card-front, .card-inside{
   position:absolute;
@@ -62,6 +65,7 @@ body{
   overflow:hidden;
 }
 
+
 .card-front{
   z-index:2;
   align-items:center;
@@ -70,6 +74,7 @@ body{
 }
 .cover-title{ font-size:clamp(1.4rem, 2.5vw, 2rem); color:#5a3700; text-align:center; }
 .cover-sub{ color:#7a4c00; margin-bottom:6px; text-align:center; font-size:clamp(0.9rem, 2vw, 1.1rem); }
+
 
 .open-btn, .btn-secret, .btn-music{
   padding:.8rem 1.4rem;
@@ -82,6 +87,7 @@ body{
   color:#3a2a05;
   box-shadow:0 8px 18px rgba(255,170,0,0.18);
 }
+
 
 .btn-secret, .btn-music{
   position:relative;
@@ -96,6 +102,7 @@ body{
   transform: scale(1.05);
 }
 
+
 .card-inside{
   transform: rotateY(180deg);
   display:flex;
@@ -105,10 +112,13 @@ body{
   gap:0.8em;
 }
 
+
 .message{ font-size:clamp(1.1rem, 2.5vw, 1.5rem); color:#a06100; text-align:center }
 .text{ color:var(--text); font-size:clamp(0.9rem, 2vw, 1rem); line-height:1.5; text-align:center }
 
+
 .footer-emo{ margin-top:12px; font-size:clamp(1rem, 2vw, 1.3rem); color:var(--accent) }
+
 
 .spongebob-img {
   width: clamp(90px, 25vw, 140px);
@@ -117,6 +127,7 @@ body{
   border-radius:12px;
   box-shadow: 0 6px 16px rgba(0,0,0,0.2);
 }
+
 
 /* --- Popup --- */
 .popup{
@@ -133,7 +144,9 @@ body{
 @keyframes pop{ from{transform:translateY(20px) scale(.96)} to{transform:translateY(0) scale(1)} }
 .close-btn{ margin-top:12px; padding:.6rem 1rem; border-radius:10px; border:none; cursor:pointer; background:#f9a825; color:white; font-weight:700; font-size:clamp(0.8rem, 2vw, 1rem); }
 
+
 .card.open{ transform: rotateY(-180deg) scale(1.01); }
+
 
 /* --- Animación flores cayendo --- */
 .falling{
@@ -157,10 +170,9 @@ body{
 .falling .petal.left{ left: -10px; transform: rotate(-15deg); }
 .falling .petal.right{ right: -10px; transform: rotate(15deg); }
 
-/* --- Ajustes responsivos --- */
 
-/* Para pantallas hasta 425px */
-@media (max-width: 425px) {
+/* --- Sólo para teléfonos móviles con ancho máximo 480px --- */
+@media (max-width: 480px) {
   body{ padding:0.5rem; }
   .wrap{ width:100%; aspect-ratio:auto; height:auto; }
   .card-front, .card-inside{ padding:0.8rem; }
@@ -172,26 +184,7 @@ body{
   .open-btn, .btn-secret, .btn-music, .close-btn{ font-size:0.8rem; padding:0.6rem 1rem; }
 }
 
-/* Para pantallas hasta 375px */
-@media (max-width: 375px) {
-  .cover-title{ font-size:1.1rem; }
-  .cover-sub{ font-size:0.8rem; }
-  .message{ font-size:0.95rem; }
-  .text{ font-size:0.8rem; }
-  .spongebob-img{ width:80px; }
-  .open-btn, .btn-secret, .btn-music, .close-btn{ font-size:0.75rem; padding:0.5rem 0.9rem; }
-}
-
-/* Para pantallas hasta 320px */
-@media (max-width: 320px) {
-  .wrap{ width:100%; }
-  .cover-title{ font-size:1rem; }
-  .cover-sub{ font-size:0.75rem; }
-  .message{ font-size:0.9rem; }
-  .text{ font-size:0.75rem; }
-  .spongebob-img{ width:70px; }
-  .open-btn, .btn-secret, .btn-music, .close-btn{ font-size:0.7rem; padding:0.5rem 0.8rem; }
-}
+/* Se eliminaron otras media queries para tabletas o dispositivos más anchos */
 </style>
 </head>
 <body>
@@ -236,6 +229,7 @@ const closePopup = document.getElementById('closePopup');
 const musicBtn = document.getElementById('musicBtn');
 const song = document.getElementById('song');
 
+
 openBtn.addEventListener('click', () => {
   card.classList.add('open');
   openBtn.style.display = 'none';
@@ -243,15 +237,18 @@ openBtn.addEventListener('click', () => {
   musicBtn.textContent = "Pausar canción 🎵";
 });
 
+
 popupBtn.addEventListener('click', () => {
   popup.classList.add('show');
   if(!song.paused) { song.pause(); musicBtn.textContent = "Reproducir canción 🎵"; }
 });
 
+
 closePopup.addEventListener('click', () => {
   popup.classList.remove('show');
   if(song.paused){ song.play(); musicBtn.textContent = "Pausar canción 🎵"; }
 });
+
 
 document.addEventListener('keydown', (e) => {
   if(e.key==='Escape' && popup.classList.contains('show')){
@@ -260,10 +257,12 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+
 musicBtn.addEventListener('click', () => {
   if(song.paused){ song.play(); musicBtn.textContent = "Pausar canción 🎵"; } 
   else { song.pause(); musicBtn.textContent = "Reproducir canción 🎵"; }
 });
+
 
 function createTulip() {
   const tulip = document.createElement("div");

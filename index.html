@@ -24,10 +24,10 @@ body{
   overflow-x:hidden;
 }
 
-
 /* --- Contenedor principal --- */
 .wrap{
   width: min(95%, 760px);
+  max-width: 95vw;
   height: auto;
   aspect-ratio: 3/2;
   display:flex;
@@ -38,18 +38,17 @@ body{
   z-index: 10;
 }
 
-
 /* --- Tarjeta --- */
 .card {
-  width:100%;
-  height:100%;
+  width: 100%;
+  height: 100%;
+  max-height: 90vh;
   position:relative;
-  transform-style:preserve-3d;
+  transform-style: preserve-3d;
   transition: transform 900ms cubic-bezier(.2,.9,.3,1);
   transform-origin: center;
   border-radius:16px;
 }
-
 
 .card-front, .card-inside{
   position:absolute;
@@ -65,29 +64,26 @@ body{
   overflow:hidden;
 }
 
-
 .card-front{
   z-index:2;
   align-items:center;
   justify-content:center;
   gap:0.5em;
 }
-.cover-title{ font-size:clamp(1.4rem, 2.5vw, 2rem); color:#5a3700; text-align:center; }
-.cover-sub{ color:#7a4c00; margin-bottom:6px; text-align:center; font-size:clamp(0.9rem, 2vw, 1.1rem); }
-
+.cover-title{ font-size:clamp(1.4rem, 4vw, 2rem); color:#5a3700; text-align:center; }
+.cover-sub{ color:#7a4c00; margin-bottom:6px; text-align:center; font-size:clamp(0.9rem, 2.5vw, 1.1rem); }
 
 .open-btn, .btn-secret, .btn-music{
-  padding:.8rem 1.4rem;
+  padding: clamp(0.6rem, 1.5vw, 1rem) clamp(1rem, 3vw, 1.4rem);
   border-radius:12px;
   border:none;
   cursor:pointer;
   background:linear-gradient(90deg,#ffd54a,#ffb300);
   font-weight:700;
-  font-size:clamp(0.9rem, 2vw, 1rem);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
   color:#3a2a05;
   box-shadow:0 8px 18px rgba(255,170,0,0.18);
 }
-
 
 .btn-secret, .btn-music{
   position:relative;
@@ -107,11 +103,11 @@ body{
   transform: rotateY(180deg);
   display:flex;
   flex-direction: column;
-  justify-content: flex-start; /* Alinea contenido al inicio */
+  justify-content: flex-start;
   align-items: center;
   gap: 0.8em;
   padding: 1em 1em 1.5em 1em;
-  overflow-y: auto; /* Permite scroll vertical */
+  overflow-y: auto;
   box-sizing: border-box;
   max-height: 100%;
 }
@@ -123,27 +119,27 @@ body{
 }
 
 .message {
-  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
   color: #a06100;
 }
 
 .text {
   color: var(--text);
-  font-size: clamp(0.9rem, 2vw, 1rem);
+  font-size: clamp(0.9rem, 2.2vw, 1rem);
   line-height: 1.5;
 }
 
 /* Ajuste para la imagen */
 .spongebob-img {
-  max-width: 120px;
+  max-width: 25%;
+  width: clamp(100px, 15vw, 150px);
   height: auto;
   margin-top: 12px;
   border-radius: 12px;
   box-shadow: 0 6px 16px rgba(0,0,0,0.2);
 }
 
-.footer-emo{ margin-top:12px; font-size:clamp(1rem, 2vw, 1.3rem); color:var(--accent) }
-
+.footer-emo{ margin-top:12px; font-size:clamp(1rem, 2.5vw, 1.3rem); color:var(--accent) }
 
 /* --- Popup --- */
 .popup{
@@ -160,9 +156,7 @@ body{
 @keyframes pop{ from{transform:translateY(20px) scale(.96)} to{transform:translateY(0) scale(1)} }
 .close-btn{ margin-top:12px; padding:.6rem 1rem; border-radius:10px; border:none; cursor:pointer; background:#f9a825; color:white; font-weight:700; font-size:clamp(0.8rem, 2vw, 1rem); }
 
-
 .card.open{ transform: rotateY(-180deg) scale(1.01); }
-
 
 /* --- Animación flores cayendo --- */
 .falling{
@@ -185,20 +179,9 @@ body{
 .falling .petal{ position: absolute; width: 20px; height: 40px; background: #f5b700; border-radius: 50%; top: 0; }
 .falling .petal.left{ left: -10px; transform: rotate(-15deg); }
 .falling .petal.right{ right: -10px; transform: rotate(15deg); }
-
-/* Mensaje para pantallas no móviles */
-#mobileOnlyMsg {
-  display: none;
-  font-family: "Segoe UI", Arial, sans-serif;
-  color: #a06100;
-  font-size: 1.2rem;
-  text-align: center;
-  padding: 2rem;
-}
 </style>
 </head>
 <body>
-<div id="mobileOnlyMsg">Esta tarjeta solo está disponible en teléfonos móviles.</div>
 
 <div class="wrap">
   <div class="card" id="card">
@@ -229,26 +212,9 @@ body{
   </div>
 </div>
 
-<!-- Usa un mp3 que esté en tu repo o un link directo -->
 <audio id="song" src="02 Hans Zimmer - Spirit： Stallion of the Cimarron - Swimming.mp3" autoplay loop></audio>
 
 <script>
-function checkScreenWidth() {
-  const wrap = document.querySelector('.wrap');
-  const msg = document.getElementById('mobileOnlyMsg');
-  const maxMobileWidth = 480;
-  if(window.innerWidth <= maxMobileWidth){
-    wrap.style.display = "flex";
-    msg.style.display = "none";
-  } else {
-    wrap.style.display = "none";
-    msg.style.display = "block";
-  }
-}
-
-window.addEventListener('resize', checkScreenWidth);
-window.addEventListener('load', checkScreenWidth);
-
 const openBtn = document.getElementById('openBtn');
 const card = document.getElementById('card');
 const popupBtn = document.getElementById('popupBtn');
